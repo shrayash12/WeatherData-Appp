@@ -1,8 +1,10 @@
-package shradha.com.weatherdata;
+package shradha.com.weatherdata.mainscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import shradha.com.weatherdata.R;
 
 public class MainActivity extends AppCompatActivity {
 
