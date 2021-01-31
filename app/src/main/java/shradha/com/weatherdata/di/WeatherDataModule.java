@@ -1,5 +1,7 @@
 package shradha.com.weatherdata.di;
 
+import android.app.Application;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -13,6 +15,12 @@ import shradha.com.weatherdata.splashscreen.WeatherRepositoryImpl;
 
 @Module
 public class WeatherDataModule {
+
+    Application application;
+
+    WeatherDataModule(Application application) {
+        this.application = application;
+    }
 
     @Provides
     @Singleton
@@ -33,8 +41,8 @@ public class WeatherDataModule {
 
     @Provides
     @Singleton
-    public static WeatherRepository provideWeatherRepository() {
-        WeatherRepository weatherRepository = new WeatherRepositoryImpl();
+    public static WeatherRepository provideWeatherRepository(WeatherService weatherService) {
+        WeatherRepository weatherRepository = new WeatherRepositoryImpl(weatherService);
         return weatherRepository;
     }
 }
