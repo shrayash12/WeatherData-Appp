@@ -37,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
 
         // Dependency injection init for this activity
         ((WeatherDataApplication) getApplication()).getWeatherDataComponents().inject(this);
-        weatherViewModel.refreshWeatherData("Singapore");
+        weatherViewModel.refreshWeatherData("Nagpur");
 
 
 
