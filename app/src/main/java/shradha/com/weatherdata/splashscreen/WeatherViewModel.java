@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -16,9 +15,7 @@ import shradha.com.weatherdata.model.WeatherResponse;
 public class WeatherViewModel extends ViewModel {
 
     WeatherRepository weatherRepository;
-
     MutableLiveData<WeatherResponse> weatherResponseMutableLiveData;
-
 
     @Inject
     public WeatherViewModel(WeatherRepository weatherRepository) {

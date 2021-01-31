@@ -21,6 +21,7 @@ import shradha.com.weatherdata.R;
 import shradha.com.weatherdata.di.WeatherDataApplication;
 import shradha.com.weatherdata.mainscreen.MainActivity;
 import shradha.com.weatherdata.model.WeatherResponse;
+import shradha.com.weatherdata.utility.DataProvider;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -43,8 +44,8 @@ public class SplashActivity extends AppCompatActivity {
         weatherViewModel.getWeatherData().observe(this, new Observer<WeatherResponse>() {
             @Override
             public void onChanged(WeatherResponse weatherResponse) {
-
-                Log.d(SplashActivity.class.getSimpleName(),weatherResponse.getName());
+                DataProvider.getInstance().setData(weatherResponse);
+                gotoNextScreen();
             }
         });
     }
