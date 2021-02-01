@@ -38,8 +38,11 @@ public class MainActivity extends AppCompatActivity {
         date.setText(""+Utility.convertIntegerDateToStringData(weatherResponse.getDt()));
 
         weatherTypeText.setText(""+weatherResponse.getWeather().get(0).getDescription());
+
         windforce.setText(""+weatherResponse.getWind().getDeg()+ "/" + weatherResponse.getWind().getSpeed());
+
         humidity.setText(""+weatherResponse.getMain().getHumidity());
+
         pressure.setText(""+weatherResponse.getMain().getPressure());
 
     }

@@ -44,9 +44,14 @@ public class Utility {
             calendar.setTime(date);
             int week = calendar.get(Calendar.DAY_OF_WEEK);
             dayOfWeek = mapIntegerDayToString(week);
+
             int month = calendar.get(Calendar.MONTH) +  1;
+
             stringBuilder.append(calendar.get(Calendar.DAY_OF_MONTH) + " ");
+
+
             stringBuilder.append(mapIntegerMonthToString(month) + ", ");
+
             stringBuilder.append(dayOfWeek);
 
         } catch (ParseException e) {
