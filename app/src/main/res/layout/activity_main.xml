@@ -104,7 +104,7 @@
             android:layout_toLeftOf="@+id/degreeSelsText"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/thunderstorm" />
+             />
 
         <TextView
             android:id="@+id/degreeSelsText"
@@ -125,7 +125,6 @@
             android:layout_width="wrap_content"
             android:layout_below="@+id/degreeSelsText"
             android:layout_alignLeft="@+id/degreeSelsText"
-            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@color/white"
@@ -196,7 +195,7 @@
                 android:layout_height="50dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/wind_new" />
+                app:lottie_rawRes="@raw/humid" />
 
 
             <TextView
@@ -234,7 +233,7 @@
                 android:layout_height="50dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/wind_new" />
+                app:lottie_rawRes="@raw/pressure" />
 
 
             <TextView

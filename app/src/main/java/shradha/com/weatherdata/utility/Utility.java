@@ -1,11 +1,21 @@
 package shradha.com.weatherdata.utility;
 
+import android.content.res.Resources;
+
+import androidx.annotation.VisibleForTesting;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import shradha.com.weatherdata.R;
 
 public class Utility {
 
@@ -14,10 +24,10 @@ public class Utility {
         return locale.getDisplayCountry();
     }
 
-    public static String getCelciusFromFar(Double temp) {
-        double celsius = temp - 273.15F;
+    public static String getCelsiusFromKelvin(Double temp) {
+        double celsius = temp - 273.15;
 
-        String ans = String.format("%.0f", celsius);
+        String ans = String.format("%.2f", celsius);
 
         return ans;
     }
@@ -45,7 +55,7 @@ public class Utility {
             int week = calendar.get(Calendar.DAY_OF_WEEK);
             dayOfWeek = mapIntegerDayToString(week);
 
-            int month = calendar.get(Calendar.MONTH) +  1;
+            int month = calendar.get(Calendar.MONTH) + 1;
 
             stringBuilder.append(calendar.get(Calendar.DAY_OF_MONTH) + " ");
 
@@ -61,7 +71,8 @@ public class Utility {
         return stringBuilder.toString();
     }
 
-    private static String mapIntegerMonthToString(int day) {
+    @VisibleForTesting
+    public static String mapIntegerMonthToString(int day) {
         String month = "";
         switch (day) {
             case 1:
@@ -109,7 +120,8 @@ public class Utility {
         return month;
     }
 
-    private static String mapIntegerDayToString(int day) {
+    @VisibleForTesting
+   public static String mapIntegerDayToString(int day) {
         String dayOfWeek = "";
         switch (day) {
             case 1:
@@ -140,6 +152,55 @@ public class Utility {
                 break;
         }
         return dayOfWeek;
+    }
+
+
+
+
+    public static String getWeatherJson(String weatherType, Resources resources) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.
+                default_weather)));
+        if (weatherType.contains("clear sky")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.sunny)));
+        } else if (weatherType.contains("moderate rain")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.moderate_raining)));
+
+        } else if (weatherType.contains("Haze")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.wind)));
+
+        } else if (weatherType.contains("few clouds")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.fewclouds)));
+
+        } else if (weatherType.contains("storm")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.stormhard)));
+
+        } else if (weatherType.contains("overcast clouds")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.cloudy)));
+        } else if (weatherType.contains("smoke")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.smoke)));
+        } else if (weatherType.contains("snow")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.snow)));
+        } else if (weatherType.contains("broken clouds")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.brokenclouds)));
+        } else if (weatherType.contains("haze")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.haze)));
+        } else if (weatherType.contains("light rain")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.light_rain)));
+        } else if (weatherType.contains("scattered clouds")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.scatteredclouds)));
+        } else if (weatherType.contains("heavy intensity rain")) {
+            br = new BufferedReader(new InputStreamReader(resources.openRawResource(R.raw.heavyrain)));
+
+        } else {
+
+        }
+
+        try {
+            return br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

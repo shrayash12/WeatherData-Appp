@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import java.util.Locale;
+import com.airbnb.lottie.LottieAnimationView;
 
 import shradha.com.weatherdata.R;
 import shradha.com.weatherdata.model.WeatherResponse;
@@ -22,32 +22,39 @@ public class MainActivity extends AppCompatActivity {
     TextView windforce;
     TextView humidity;
     TextView pressure;
+    LottieAnimationView lottieAnimationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         findViews();
         WeatherResponse weatherResponse = DataProvider.getInstance().getData();
 
-        cityName.setText(weatherResponse.getName()+",");
+        lottieAnimationView.setAnimationFromJson(Utility.getWeatherJson(weatherResponse.getWeather().get(0).getDescription(),getResources()), "");
+
+        cityName.setText(weatherResponse.getName() + ",");
 
         countryName.setText(Utility.getCountryNameFromCode(weatherResponse.getSys().getCountry()));
 
-        degreeSelsText.setText("" + Utility.getCelciusFromFar(weatherResponse.getMain().getTemp()));
+        degreeSelsText.setText("" + Utility.getCelsiusFromKelvin(weatherResponse.getMain().getTemp()));
 
-        date.setText(""+Utility.convertIntegerDateToStringData(weatherResponse.getDt()));
+        date.setText("" + Utility.convertIntegerDateToStringData(weatherResponse.getDt()));
 
-        weatherTypeText.setText(""+weatherResponse.getWeather().get(0).getDescription());
+        weatherTypeText.setText("" + weatherResponse.getWeather().get(0).getDescription());
 
-        windforce.setText(""+weatherResponse.getWind().getDeg()+ "/" + weatherResponse.getWind().getSpeed());
+        windforce.setText("" + weatherResponse.getWind().getDeg() + "/" + weatherResponse.getWind().getSpeed()+"hr");
 
-        humidity.setText(""+weatherResponse.getMain().getHumidity());
+        humidity.setText("" + weatherResponse.getMain().getHumidity()+"%");
 
-        pressure.setText(""+weatherResponse.getMain().getPressure());
+        pressure.setText("" + weatherResponse.getMain().getPressure()+" mBar");
 
     }
 
     public void findViews() {
+        lottieAnimationView = findViewById(R.id.animationView);
         cityName = findViewById(R.id.cityName);
         countryName = findViewById(R.id.countryName);
         date = findViewById(R.id.date);

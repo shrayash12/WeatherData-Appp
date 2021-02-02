@@ -47,6 +47,10 @@ public class WeatherResponse {
     @Expose
     private Integer cod;
 
+    public WeatherResponse(String name){
+        this.name = name;
+    }
+
     public Coord getCoord() {
         return coord;
     }
