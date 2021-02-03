@@ -258,28 +258,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
+        android:layout_marginLeft="30dp"
+
         android:padding="3dp">
 
-        <TextView
-            android:id="@+id/todayBottomText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="30dp"
-            android:text="Today"
-            android:textColor="#FFFFFF"
-            android:textSize="30dp" />
+
 
         <TextView
             android:id="@+id/nextDaysTextIc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/icon"
-            android:text="Next 7 days"
+            android:text="Next 5 days"
             android:textColor="#FFFFFF"
             android:textSize="15dp"
 
@@ -289,7 +281,7 @@
             android:id="@+id/icon"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/nextDaysTextIc"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
             android:src="@drawable/ic_right_arrow" />
