@@ -27,9 +27,9 @@ public class Utility {
     public static String getCelsiusFromKelvin(Double temp) {
         double celsius = temp - 273.15;
 
-        String ans = String.format("%.2f", celsius);
+        String ans = String.format("%.0f", celsius);
 
-        return ans;
+        return (ans + "\u2103");
     }
 
     public static String convertIntegerDateToStringData(Integer integer) {
@@ -121,7 +121,7 @@ public class Utility {
     }
 
     @VisibleForTesting
-   public static String mapIntegerDayToString(int day) {
+    public static String mapIntegerDayToString(int day) {
         String dayOfWeek = "";
         switch (day) {
             case 1:
@@ -153,8 +153,6 @@ public class Utility {
         }
         return dayOfWeek;
     }
-
-
 
 
     public static String getWeatherJson(String weatherType, Resources resources) {

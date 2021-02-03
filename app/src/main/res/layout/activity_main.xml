@@ -115,7 +115,7 @@
             android:layout_marginTop="80dp"
             android:layout_marginRight="80dp"
             android:fontFamily="@font/questrial"
-            android:text="16"
+            android:text="16;"
             android:textColor="#FFFFFF"
             android:textSize="50dp"
             android:textStyle="bold" />
@@ -153,12 +153,10 @@
             android:orientation="vertical">
 
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/wind_new" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+              android:src="@drawable/wind_force"/>
 
             <TextView
                 android:id="@+id/windforce"
@@ -190,12 +188,10 @@
 
 
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/humid" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/humidity" />
 
 
             <TextView
@@ -228,12 +224,10 @@
 
 
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/pressure" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/pressure" />
 
 
             <TextView

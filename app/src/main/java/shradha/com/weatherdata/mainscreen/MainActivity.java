@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         findViews();
         WeatherResponse weatherResponse = DataProvider.getInstance().getData();
 
-        lottieAnimationView.setAnimationFromJson(Utility.getWeatherJson(weatherResponse.getWeather().get(0).getDescription(),getResources()), "");
+        lottieAnimationView.setAnimationFromJson(Utility.getWeatherJson(weatherResponse.getWeather().get(0).getDescription(), getResources()), "");
 
         cityName.setText(weatherResponse.getName() + ",");
 
@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
         weatherTypeText.setText("" + weatherResponse.getWeather().get(0).getDescription());
 
-        windforce.setText("" + weatherResponse.getWind().getDeg() + "/" + weatherResponse.getWind().getSpeed()+"hr");
+        windforce.setText("" + weatherResponse.getWind().getDeg() + "/" + weatherResponse.getWind().getSpeed() + "hr");
 
-        humidity.setText("" + weatherResponse.getMain().getHumidity()+"%");
+        humidity.setText("" + weatherResponse.getMain().getHumidity() + "%");
 
-        pressure.setText("" + weatherResponse.getMain().getPressure()+" mBar");
+        pressure.setText("" + weatherResponse.getMain().getPressure() + " mBar");
 
     }
 
