@@ -22,17 +22,18 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         this.weatherService = weatherService;
     }
 
+
     @Override
-    public Observable<WeatherResponse> getWeatherData(String query) {
-        return weatherService.getWeatherData(query, Constants.API_KEY);
+    public Observable<WeatherResponse> getWeatherData(String lat, String lon) {
+        return weatherService.getWeatherData(lat,lon,Constants.API_KEY);
     }
 
     @Override
-    public Observable<Pair<WeatherResponse, WeatherNextDays>> getWeatherForecast(String query) {
+    public Observable<Pair<WeatherResponse, WeatherNextDays>> getWeatherForecast(String lat, String lon) {
         return Observable
                 .combineLatest(
-                        weatherService.getWeatherData(query, Constants.API_KEY),
-                        weatherService.getWeatherForNext5Days("1.2776", "103.8531", Constants.API_KEY, Constants.EXCLUDE_DATA),
+                        weatherService.getWeatherData(lat, lon, Constants.API_KEY),
+                        weatherService.getWeatherForNext5Days(lat, lon, Constants.API_KEY, Constants.EXCLUDE_DATA),
                         new BiFunction<WeatherResponse, WeatherNextDays, Pair<WeatherResponse, WeatherNextDays>>() {
                             @Override
                             public Pair<WeatherResponse, WeatherNextDays> apply(WeatherResponse weatherResponse, WeatherNextDays weatherNextDays) throws Throwable {

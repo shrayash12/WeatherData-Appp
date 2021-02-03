@@ -8,7 +8,7 @@ import shradha.com.weatherdata.model.WeatherResponse;
 import shradha.com.weatherdata.model.nextdays.WeatherNextDays;
 
 public interface WeatherRepository {
-    Observable<WeatherResponse> getWeatherData(String query);
+    Observable<WeatherResponse> getWeatherData(String lat, String lon);
 
-    Observable<Pair<WeatherResponse, WeatherNextDays>> getWeatherForecast(String query);
+    Observable<Pair<WeatherResponse, WeatherNextDays>> getWeatherForecast(String lat, String lon);
 }

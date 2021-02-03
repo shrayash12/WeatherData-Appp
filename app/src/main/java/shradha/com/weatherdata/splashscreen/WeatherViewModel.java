@@ -34,10 +34,10 @@ public class WeatherViewModel extends ViewModel {
         return weatherForecastResponseMutableLiveData;
     }
 
-    public void refreshWeatherForecast(String query) {
+    public void refreshWeatherForecast(String lat,String lon) {
         weatherForecastResponseMutableLiveData = new MutableLiveData<>();
         weatherResponseMutableLiveData = new MutableLiveData<>();
-        weatherRepository.getWeatherForecast(query)
+        weatherRepository.getWeatherForecast(lat,lon)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Pair<WeatherResponse, WeatherNextDays>>() {
