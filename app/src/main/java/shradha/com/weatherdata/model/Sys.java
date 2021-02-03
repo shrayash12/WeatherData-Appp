@@ -25,6 +25,18 @@ public class Sys {
     @Expose
     private Integer sunset;
 
+    public String getPod() {
+        return pod;
+    }
+
+    public void setPod(String pod) {
+        this.pod = pod;
+    }
+
+    @SerializedName("pod")
+    @Expose
+    private String pod;
+
     public Integer getType() {
         return type;
     }

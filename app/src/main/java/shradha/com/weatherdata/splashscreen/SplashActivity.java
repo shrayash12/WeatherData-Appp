@@ -20,6 +20,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import shradha.com.weatherdata.R;
 import shradha.com.weatherdata.di.WeatherDataApplication;
 import shradha.com.weatherdata.mainscreen.MainActivity;
+import shradha.com.weatherdata.model.WeatherForecast;
 import shradha.com.weatherdata.model.WeatherResponse;
 import shradha.com.weatherdata.utility.DataProvider;
 
@@ -37,8 +38,7 @@ public class SplashActivity extends AppCompatActivity {
 
         // Dependency injection init for this activity
         ((WeatherDataApplication) getApplication()).getWeatherDataComponents().inject(this);
-        weatherViewModel.refreshWeatherData("Singapore");
-
+        weatherViewModel.refreshWeatherForecast("Singapore");
 
 
         weatherViewModel.getWeatherData().observe(this, new Observer<WeatherResponse>() {
@@ -46,8 +46,18 @@ public class SplashActivity extends AppCompatActivity {
             public void onChanged(WeatherResponse weatherResponse) {
                 DataProvider.getInstance().setData(weatherResponse);
                 gotoNextScreen();
+
             }
         });
+
+        weatherViewModel.getWeatherForecastData().observe(this, new Observer<WeatherForecast>() {
+            @Override
+            public void onChanged(WeatherForecast weatherForecast) {
+                DataProvider.getInstance().setWeatherForecast(weatherForecast);
+            }
+        });
+
+
     }
 
     private void gotoNextScreen() {
