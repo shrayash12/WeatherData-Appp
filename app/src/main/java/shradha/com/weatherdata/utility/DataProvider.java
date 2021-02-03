@@ -4,12 +4,13 @@ package shradha.com.weatherdata.utility;
 
 import shradha.com.weatherdata.model.WeatherForecast;
 import shradha.com.weatherdata.model.WeatherResponse;
+import shradha.com.weatherdata.model.nextdays.WeatherNextDays;
 
 public class DataProvider {
     static DataProvider dataProvider = null;
     WeatherResponse weatherResponse;
 
-    WeatherForecast weatherForecast;
+    WeatherNextDays weatherNextDays;
 
     private DataProvider() {
 
@@ -22,19 +23,19 @@ public class DataProvider {
         return dataProvider;
     }
 
-    public WeatherForecast getWeatherForecast() {
-        return weatherForecast;
+    public WeatherNextDays getWeatherForecast() {
+        return weatherNextDays;
     }
 
-    public void setWeatherForecast(WeatherForecast weatherForecast) {
-        this.weatherForecast = weatherForecast;
+    public void setWeatherForecast(WeatherNextDays weatherNextDays) {
+        this.weatherNextDays = weatherNextDays;
     }
 
     public void setData(WeatherResponse weatherResponse) {
         this.weatherResponse = weatherResponse;
     }
 
-   public WeatherResponse getData() {
+    public WeatherResponse getData() {
         return weatherResponse;
     }
 

@@ -308,7 +308,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/time12"
+                android:id="@+id/day_1"
                 android:layout_width="wrap_content"
                 android:text="12:00"
                 android:textSize="14sp"
@@ -323,14 +323,15 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+             android:id="@+id/day_1temp"
                 android:layout_width="wrap_content"
-                android:text="16"
-                android:textSize="14sp"
-                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textColor="@color/white"
+                android:gravity="center_horizontal"
                 android:paddingLeft="10dp"
-                android:layout_height="wrap_content"/>
+                android:text="16"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -343,7 +344,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/time11"
+                android:id="@+id/day_2"
                 android:layout_width="wrap_content"
                 android:text="12:00"
                 android:textSize="14sp"
@@ -358,6 +359,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/day_2temp"
                 android:layout_width="wrap_content"
                 android:text="16"
                 android:textSize="14sp"
@@ -378,7 +380,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/time15"
+                android:id="@+id/day_3"
                 android:layout_width="wrap_content"
                 android:text="12:00"
                 android:textSize="14sp"
@@ -393,6 +395,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/day_3temp"
                 android:layout_width="wrap_content"
                 android:text="16"
                 android:textSize="14sp"
@@ -413,7 +416,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/time13"
+                android:id="@+id/day_4"
                 android:layout_width="wrap_content"
                 android:text="12:00"
                 android:textSize="14sp"
@@ -428,6 +431,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/day_4temp"
                 android:layout_width="wrap_content"
                 android:text="16"
                 android:textSize="14sp"
@@ -448,7 +452,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/time14"
+                android:id="@+id/day_5"
                 android:layout_width="wrap_content"
                 android:text="12:00"
                 android:textSize="14sp"
@@ -463,6 +467,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/day_5temp"
                 android:layout_width="wrap_content"
                 android:text="16"
                 android:textSize="14sp"

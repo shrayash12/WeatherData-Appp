@@ -14,11 +14,12 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import shradha.com.weatherdata.model.WeatherForecast;
 import shradha.com.weatherdata.model.WeatherResponse;
+import shradha.com.weatherdata.model.nextdays.WeatherNextDays;
 
 public class WeatherViewModel extends ViewModel {
     WeatherRepository weatherRepository;
     MutableLiveData<WeatherResponse> weatherResponseMutableLiveData;
-    MutableLiveData<WeatherForecast> weatherForecastResponseMutableLiveData;
+    MutableLiveData<WeatherNextDays> weatherForecastResponseMutableLiveData;
 
     @Inject
     public WeatherViewModel(WeatherRepository weatherRepository) {
@@ -29,7 +30,7 @@ public class WeatherViewModel extends ViewModel {
         return weatherResponseMutableLiveData;
     }
 
-    public MutableLiveData<WeatherForecast> getWeatherForecastData() {
+    public MutableLiveData<WeatherNextDays> getWeatherForecastData() {
         return weatherForecastResponseMutableLiveData;
     }
 
@@ -39,13 +40,13 @@ public class WeatherViewModel extends ViewModel {
         weatherRepository.getWeatherForecast(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Pair<WeatherResponse, WeatherForecast>>() {
+                .subscribe(new Observer<Pair<WeatherResponse, WeatherNextDays>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                     }
 
                     @Override
-                    public void onNext(@NonNull Pair<WeatherResponse, WeatherForecast> pair) {
+                    public void onNext(@NonNull Pair<WeatherResponse, WeatherNextDays> pair) {
                         weatherResponseMutableLiveData.postValue(pair.first);
                         weatherForecastResponseMutableLiveData.postValue(pair.second);
                     }

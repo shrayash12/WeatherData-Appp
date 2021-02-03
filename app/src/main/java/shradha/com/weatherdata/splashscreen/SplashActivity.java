@@ -22,6 +22,7 @@ import shradha.com.weatherdata.di.WeatherDataApplication;
 import shradha.com.weatherdata.mainscreen.MainActivity;
 import shradha.com.weatherdata.model.WeatherForecast;
 import shradha.com.weatherdata.model.WeatherResponse;
+import shradha.com.weatherdata.model.nextdays.WeatherNextDays;
 import shradha.com.weatherdata.utility.DataProvider;
 
 public class SplashActivity extends AppCompatActivity {
@@ -38,7 +39,7 @@ public class SplashActivity extends AppCompatActivity {
 
         // Dependency injection init for this activity
         ((WeatherDataApplication) getApplication()).getWeatherDataComponents().inject(this);
-        weatherViewModel.refreshWeatherForecast("Singapore");
+        weatherViewModel.refreshWeatherForecast("São Paulo");
 
 
         weatherViewModel.getWeatherData().observe(this, new Observer<WeatherResponse>() {
@@ -50,9 +51,9 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
 
-        weatherViewModel.getWeatherForecastData().observe(this, new Observer<WeatherForecast>() {
+        weatherViewModel.getWeatherForecastData().observe(this, new Observer<WeatherNextDays>() {
             @Override
-            public void onChanged(WeatherForecast weatherForecast) {
+            public void onChanged(WeatherNextDays weatherForecast) {
                 DataProvider.getInstance().setWeatherForecast(weatherForecast);
             }
         });

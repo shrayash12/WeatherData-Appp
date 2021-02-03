@@ -7,11 +7,6 @@ import androidx.annotation.VisibleForTesting;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -33,42 +28,14 @@ public class Utility {
     }
 
     public static String convertIntegerDateToStringData(Integer integer) {
-        /*
-         * 132472394793
-         *
-         * Date date = new Date();
-         *
-         * Calender c  = Calendar.getInStance();
-         *
-         * c.setTime(date);
-         *
-         * */
-        SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
-        Date date = null;
-        String dayOfWeek = "";
-        StringBuilder stringBuilder = new StringBuilder();
+        Date date = new Date(integer * 1000L);
+        String dayOfTheWeek = (String) android.text.format.DateFormat.format("EEEE", date); // Thursday
+        String day = (String) android.text.format.DateFormat.format("dd", date); // 20
+        String monthString = (String) android.text.format.DateFormat.format("MMM", date); // Jun
+        String monthNumber = (String) android.text.format.DateFormat.format("MM", date); // 06
+        String year = (String) android.text.format.DateFormat.format("yyyy", date); // 2013
 
-        try {
-            date = originalFormat.parse(integer.toString());
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            int week = calendar.get(Calendar.DAY_OF_WEEK);
-            dayOfWeek = mapIntegerDayToString(week);
-
-            int month = calendar.get(Calendar.MONTH) + 1;
-
-            stringBuilder.append(calendar.get(Calendar.DAY_OF_MONTH) + " ");
-
-
-            stringBuilder.append(mapIntegerMonthToString(month) + ", ");
-
-            stringBuilder.append(dayOfWeek);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return stringBuilder.toString();
+        return day + " " + monthString + ", " + dayOfTheWeek;
     }
 
     @VisibleForTesting
@@ -199,6 +166,17 @@ public class Utility {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static String getDateForNextDay(Integer integer) {
+        Date date = new Date(integer * 1000L);
+        String dayOfTheWeek = (String) android.text.format.DateFormat.format("EEEE", date); // Thursday
+        String day = (String) android.text.format.DateFormat.format("dd", date); // 20
+        String monthString = (String) android.text.format.DateFormat.format("MMM", date); // Jun
+        String monthNumber = (String) android.text.format.DateFormat.format("MM", date); // 06
+        String year = (String) android.text.format.DateFormat.format("yyyy", date); // 2013
+
+        return day + monthString;
     }
 
 }
