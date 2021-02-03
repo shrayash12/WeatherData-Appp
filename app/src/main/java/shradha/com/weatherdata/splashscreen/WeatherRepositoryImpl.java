@@ -14,14 +14,12 @@ import shradha.com.weatherdata.model.WeatherService;
 import shradha.com.weatherdata.utility.Constants;
 
 public class WeatherRepositoryImpl implements WeatherRepository {
-
     private final WeatherService weatherService;
 
     @Inject
     public WeatherRepositoryImpl(WeatherService weatherService) {
         this.weatherService = weatherService;
     }
-
 
     @Override
     public Observable<WeatherResponse> getWeatherData(String query) {
@@ -37,12 +35,12 @@ public class WeatherRepositoryImpl implements WeatherRepository {
                         new BiFunction<WeatherResponse, WeatherForecast, Pair<WeatherResponse, WeatherForecast>>() {
                             @Override
                             public Pair<WeatherResponse, WeatherForecast> apply(WeatherResponse weatherResponse, WeatherForecast weatherForecast) throws Throwable {
-                                return new Pair(weatherResponse,weatherForecast);
+                                return new Pair(weatherResponse, weatherForecast);
                             }
                         }).doOnError(new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Throwable {
-                        Log.d(WeatherRepositoryImpl.class.getSimpleName(),throwable.getLocalizedMessage());
+                        Log.d(WeatherRepositoryImpl.class.getSimpleName(), throwable.getLocalizedMessage());
                     }
                 });
     }
