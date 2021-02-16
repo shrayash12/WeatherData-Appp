@@ -2,7 +2,10 @@ package shradha.com.weatherdata.mainscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 
@@ -12,6 +15,7 @@ import shradha.com.weatherdata.R;
 import shradha.com.weatherdata.model.WeatherForecast;
 import shradha.com.weatherdata.model.WeatherResponse;
 import shradha.com.weatherdata.model.nextdays.WeatherNextDays;
+import shradha.com.weatherdata.splashscreen.SearchActivity;
 import shradha.com.weatherdata.utility.DataProvider;
 import shradha.com.weatherdata.utility.Utility;
 
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     TextView day_3temp;
     TextView day_4temp;
     TextView day_5temp;
+    ImageView searchIcon;
 
 
     @Override
@@ -114,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
         day_3temp = findViewById(R.id.day_3temp);
         day_4temp = findViewById(R.id.day_4temp);
         day_5temp = findViewById(R.id.day_5temp);
-
+        searchIcon = findViewById(R.id.searchIcon);
 
     }
+
 }
