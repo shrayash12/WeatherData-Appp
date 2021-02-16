@@ -2,6 +2,7 @@ package shradha.com.weatherdata.splashscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -22,6 +23,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         searchView = findViewById(R.id.searchView);
         listView = findViewById(R.id.listView);
+        Intent intent = getIntent();
 
     }
 }

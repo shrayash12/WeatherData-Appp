@@ -96,7 +96,15 @@ public class MainActivity extends AppCompatActivity {
         day_5.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(5).getDt()));
 
         //endregion
-
+        //region go to searchActivity
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(searchIntent);
+            }
+        });
+        //endregion
     }
 
     public void findViews() {
