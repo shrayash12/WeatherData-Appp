@@ -29,6 +29,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import shradha.com.weatherdata.R;
+import shradha.com.weatherdata.about.AboutActivity;
 import shradha.com.weatherdata.di.WeatherDataApplication;
 import shradha.com.weatherdata.model.WeatherForecast;
 import shradha.com.weatherdata.model.WeatherResponse;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     LottieAnimationView time15Image;
     LottieAnimationView time13Image;
     LottieAnimationView time14Image;
-
+   ImageView imageInformation;
 
 
     @Override
@@ -126,6 +127,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        imageInformation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+            }
+        });
 
     }
 
@@ -244,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
         time13Image = findViewById(R.id.time13Image);
         time14Image = findViewById(R.id.time14Image);
         time15Image = findViewById(R.id.time15Image);
-
+        imageInformation = findViewById(R.id.ivInfo);
 
     }
 }
