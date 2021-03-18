@@ -1,5 +1,6 @@
 package shradha.com.weatherdata.mainscreen;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
@@ -7,6 +8,7 @@ import androidx.lifecycle.Observer;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         //endregion
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public boolean onQueryTextSubmit(String query) {
                 List<LatLng> location = getLatLngFromString(query);
@@ -98,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
                     });
 
                 }
+                searchView.setQuery("", false);
+                searchView.setIconified(true);
+                searchView.clearFocus();
                 return false;
             }
 

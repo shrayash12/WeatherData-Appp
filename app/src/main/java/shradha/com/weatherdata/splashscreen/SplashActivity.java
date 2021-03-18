@@ -1,5 +1,6 @@
 package shradha.com.weatherdata.splashscreen;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -112,6 +113,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent, bundle);
+        finish();
     }
 
 }
