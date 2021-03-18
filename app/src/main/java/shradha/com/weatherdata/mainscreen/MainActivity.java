@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -130,8 +131,12 @@ public class MainActivity extends AppCompatActivity {
         imageInformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = ActivityOptions.makeCustomAnimation(MainActivity.this,
+                        R.anim.slide_in_right_medium,
+                        R.anim.slide_out_left_medium).toBundle();
 
-                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent, bundle);
             }
         });
 

@@ -10,6 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:gravity="right"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -23,7 +24,6 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="wrap_content"
-            android:maxWidth="400dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"

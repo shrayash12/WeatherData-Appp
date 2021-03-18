@@ -79,9 +79,12 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(linkedInIntent);
                 break;
             case R.id.ivBack:
-                onBackPressed();
-                finish();
+                finishWithTransition();
                 break;
         }
+    }
+    private void finishWithTransition() {
+        finish();
+        overridePendingTransition(R.anim.slide_in_left_medium, R.anim.slide_out_right_medium);
     }
 }
