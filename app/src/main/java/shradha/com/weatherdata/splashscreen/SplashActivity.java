@@ -1,5 +1,6 @@
 package shradha.com.weatherdata.splashscreen;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -24,7 +25,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -106,6 +106,62 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case LOCATION_PERMISSION_REQUEST_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        fusedLocationClient.getLastLocation()
+                                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                                    @Override
+                                    public void onSuccess(Location location) {
+                                        // Got last known location. In some rare situations this can be null.
+                                        if (location != null) {
+                                            weatherViewModel.refreshWeatherForecast("" + location.getLatitude(), "" + location.getLongitude());
+                                            weatherViewModel.getWeatherData().observe(SplashActivity.this, new Observer<WeatherResponse>() {
+                                                @Override
+                                                public void onChanged(WeatherResponse weatherResponse) {
+                                                    DataProvider.getInstance().setData(weatherResponse);
+                                                    gotoNextScreen();
+
+                                                }
+                                            });
+
+                                            weatherViewModel.getWeatherForecastData().observe(SplashActivity.this, new Observer<WeatherNextDays>() {
+                                                @Override
+                                                public void onChanged(WeatherNextDays weatherForecast) {
+                                                    DataProvider.getInstance().setWeatherForecast(weatherForecast);
+                                                }
+                                            });
+
+
+                                        }
+                                    }
+                                });
+
+
+                    } else {
+
+                        // permission denied, boo! Disable the
+                        // functionality that depends on this permission.
+
+                    }
+                    return;
+                }
+
+            }
+        }
+    }
     private void gotoNextScreen() {
         Bundle bundle = ActivityOptions.makeCustomAnimation(this,
                 R.anim.slide_in_right_medium,
