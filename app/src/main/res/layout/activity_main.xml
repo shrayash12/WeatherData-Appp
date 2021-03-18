@@ -304,12 +304,17 @@
                 android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
 
-            <ImageView
-                android:id="@+id/time12Image"
-                android:layout_width="wrap_content"
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/time11Image"
+                android:layout_width="40dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_storm"
-                android:layout_height="wrap_content"/>
+                android:scaleType="centerCrop"
+                android:layout_height="50dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                />
 
             <TextView
              android:id="@+id/day_1temp"
@@ -340,12 +345,16 @@
                 android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
 
-            <ImageView
-                android:id="@+id/time11Image"
-                android:layout_width="wrap_content"
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/time12Image"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_storm"
-                android:layout_height="wrap_content"/>
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true" />
 
             <TextView
                 android:id="@+id/day_2temp"
@@ -376,12 +385,17 @@
                 android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
 
-            <ImageView
-                android:id="@+id/time15Image"
-                android:layout_width="wrap_content"
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/time13Image"
+                android:layout_width="40dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_storm"
-                android:layout_height="wrap_content"/>
+                android:scaleType="centerCrop"
+                android:layout_height="50dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                />
 
             <TextView
                 android:id="@+id/day_3temp"
@@ -412,12 +426,17 @@
                 android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
 
-            <ImageView
-                android:id="@+id/time13Image"
-                android:layout_width="wrap_content"
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/time14Image"
+                android:layout_width="40dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_storm"
-                android:layout_height="wrap_content"/>
+                android:scaleType="centerCrop"
+                android:layout_height="50dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                />
 
             <TextView
                 android:id="@+id/day_4temp"
@@ -448,12 +467,18 @@
                 android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
 
-            <ImageView
-                android:id="@+id/time14Image"
-                android:layout_width="wrap_content"
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/time15Image"
+                android:layout_width="40dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_storm"
-                android:layout_height="wrap_content"/>
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                />
+
 
             <TextView
                 android:id="@+id/day_5temp"

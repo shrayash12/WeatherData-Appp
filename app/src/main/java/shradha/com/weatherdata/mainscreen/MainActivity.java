@@ -61,6 +61,12 @@ public class MainActivity extends AppCompatActivity {
     TextView day_4temp;
     TextView day_5temp;
     androidx.appcompat.widget.SearchView searchView;
+    LottieAnimationView time12Image;
+    LottieAnimationView time11Image;
+    LottieAnimationView time15Image;
+    LottieAnimationView time13Image;
+    LottieAnimationView time14Image;
+
 
 
     @Override
@@ -138,25 +144,48 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void next5daysWeather(WeatherNextDays weatherNextDays) {
-        day_1temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(1).getTemp().getDay()));
+        day_1temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(0).getTemp().getDay()));
 
-        day_2temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(2).getTemp().getDay()));
+        day_2temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(1).getTemp().getDay()));
 
-        day_3temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(3).getTemp().getDay()));
+        day_3temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(2).getTemp().getDay()));
 
-        day_4temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(4).getTemp().getDay()));
+        day_4temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(3).getTemp().getDay()));
 
-        day_5temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(5).getTemp().getDay()));
+        day_5temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(4).getTemp().getDay()));
 
-        day_1.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(1).getDt()));
+        day_1.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(0).getDt()));
 
-        day_2.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(2).getDt()));
+        time11Image.setAnimationFromJson(Utility.getWeatherJson(
+                weatherNextDays.getDaily().get(0).getWeather().get(0).getDescription()
+                ,getResources()));
 
-        day_3.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(3).getDt()));
+        day_2.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(1).getDt()));
 
-        day_4.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(4).getDt()));
+        time12Image.setAnimationFromJson(Utility.getWeatherJson(
+                weatherNextDays.getDaily().get(1).getWeather().get(0).getDescription()
+                ,getResources()));
 
-        day_5.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(5).getDt()));
+        day_3.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(2).getDt()));
+
+        time13Image.setAnimationFromJson(Utility.getWeatherJson(
+                weatherNextDays.getDaily().get(2).getWeather().get(0).getDescription()
+                ,getResources()));
+
+        day_4.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(3).getDt()));
+
+        time14Image.setAnimationFromJson(Utility.getWeatherJson(
+                weatherNextDays.getDaily().get(3).getWeather().get(0).getDescription()
+                ,getResources()));
+
+        day_5.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(4).getDt()));
+
+        time15Image.setAnimationFromJson(Utility.getWeatherJson(
+                weatherNextDays.getDaily().get(4).getWeather().get(0).getDescription()
+                ,getResources()));
+
+
+
     }
 
     private void setTodayWeatherResponse(WeatherResponse weatherResponse) {
@@ -203,6 +232,12 @@ public class MainActivity extends AppCompatActivity {
         day_4temp = findViewById(R.id.day_4temp);
         day_5temp = findViewById(R.id.day_5temp);
         searchView = findViewById(R.id.searchView);
+        time11Image = findViewById(R.id.time11Image);
+        time12Image = findViewById(R.id.time12Image);
+        time13Image = findViewById(R.id.time13Image);
+        time14Image = findViewById(R.id.time14Image);
+        time15Image = findViewById(R.id.time15Image);
+
 
     }
 }
