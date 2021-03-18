@@ -5,13 +5,22 @@ import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -71,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                weatherViewModel.refreshWeatherForecast("1.3521", "103.8198");
+                List<LatLng> location = getLatLngFromString(query);
+                weatherViewModel.refreshWeatherForecast("" + location.get(0).latitude, "" + location.get(0).longitude);
                 if (weatherViewModel != null) {
                     weatherViewModel.getWeatherData().observe(MainActivity.this, new Observer<WeatherResponse>() {
                         @Override
@@ -98,6 +108,27 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+    private List<LatLng> getLatLngFromString(String location) {
+        List<LatLng> ll = null;
+        if (Geocoder.isPresent()) {
+            try {
+                Geocoder gc = new Geocoder(this);
+                List<Address> addresses = gc.getFromLocationName(location, 5); // get the found Address Objects
+
+                ll = new ArrayList<LatLng>(addresses.size()); // A list to save the coordinates if they are available
+                for (Address a : addresses) {
+                    if (a.hasLatitude() && a.hasLongitude()) {
+                        ll.add(new LatLng(a.getLatitude(), a.getLongitude()));
+                    }
+                }
+            } catch (IOException e) {
+                // handle the exception
+            }
+        }
+        return ll;
     }
 
     private void next5daysWeather(WeatherNextDays weatherNextDays) {
