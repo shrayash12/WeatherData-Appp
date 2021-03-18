@@ -22,6 +22,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     ImageView ivGithub;
     ImageView ivBack;
     LinearLayout linearLayoutMentor;
+    LinearLayout openweatherContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +33,12 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         ivGithub = findViewById(R.id.ivGithub);
         ivBack = findViewById(R.id.ivBack);
         linearLayoutMentor = findViewById(R.id.yashwantContainer);
+        openweatherContainer = findViewById(R.id.openweatherContainer);
         ivLinkedin.setOnClickListener(this);
         ivTwitter.setOnClickListener(this);
         ivGithub.setOnClickListener(this);
         ivBack.setOnClickListener(this);
+        openweatherContainer.setOnClickListener(this);
         linearLayoutMentor.setOnClickListener(this);
         setImageToSocialMedia();
     }
@@ -80,6 +83,10 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.ivBack:
                 finishWithTransition();
+                break;
+            case R.id.openweatherContainer:
+                Intent openweather = new Intent(Intent.ACTION_VIEW, Uri.parse("https://openweathermap.org/api"));
+                startActivity(openweather);
                 break;
         }
     }

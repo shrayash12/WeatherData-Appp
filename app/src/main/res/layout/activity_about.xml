@@ -6,15 +6,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="@drawable/gradient_background"
     android:orientation="vertical"
     android:weightSum="1">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:background="@color/teal_700">
+        android:layout_weight="0.5">
 
         <ImageView
             android:id="@+id/ivBack"
@@ -114,50 +113,97 @@
             app:cardElevation="2dp">
 
             <LinearLayout
-                android:id="@+id/yashwantContainer"
-                style="@style/Widget.CardContent"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Credits"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/teal_700" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="5dp" />
-
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <LinearLayout
-                    android:id="@+id/yashwant"
+                    android:id="@+id/yashwantContainer"
+                    style="@style/Widget.CardContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Yashwant Chawhan"
+                        android:text="Credits"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/teal_700"
-                        android:textSize="16sp"
-                        tools:ignore="HardcodedText" />
+                        android:textColor="@color/teal_700" />
 
-                    <TextView
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="5dp" />
+
+
+                    <LinearLayout
+                        android:id="@+id/yashwant"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Mentor"
-                        android:textColor="@color/teal_700"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                        android:background="?android:attr/selectableItemBackground"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Yashwant Chawhan"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/teal_700"
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mentor"
+                            android:textColor="@color/teal_700"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/openweatherContainer"
+                    style="@style/Widget.CardContent"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:layout_height="wrap_content">
+
+
+
+
+                    <LinearLayout
+                        android:id="@+id/openweather"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="openweathermap.org"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/teal_700"
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="API Provider"
+                            android:textColor="@color/teal_700"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
             </LinearLayout>
+
+
 
         </androidx.cardview.widget.CardView>
 
