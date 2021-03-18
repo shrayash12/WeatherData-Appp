@@ -1,6 +1,8 @@
 package shradha.com.weatherdata.mainscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +13,22 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import javax.inject.Inject;
+
 import shradha.com.weatherdata.R;
+import shradha.com.weatherdata.di.WeatherDataApplication;
 import shradha.com.weatherdata.model.WeatherForecast;
 import shradha.com.weatherdata.model.WeatherResponse;
 import shradha.com.weatherdata.model.nextdays.WeatherNextDays;
 import shradha.com.weatherdata.splashscreen.SearchActivity;
+import shradha.com.weatherdata.splashscreen.WeatherViewModel;
 import shradha.com.weatherdata.utility.DataProvider;
 import shradha.com.weatherdata.utility.Utility;
 
 public class MainActivity extends AppCompatActivity {
+
+    @Inject
+    WeatherViewModel weatherViewModel;
 
     TextView cityName;
     TextView countryName;
@@ -40,41 +49,58 @@ public class MainActivity extends AppCompatActivity {
     TextView day_3temp;
     TextView day_4temp;
     TextView day_5temp;
-    ImageView searchIcon;
+    androidx.appcompat.widget.SearchView searchView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ((WeatherDataApplication) getApplication()).getWeatherDataComponents().inject(this);
 
 
         findViews();
         WeatherResponse weatherResponse = DataProvider.getInstance().getData();
-
-        lottieAnimationView.setAnimationFromJson(Utility.getWeatherJson(weatherResponse.getWeather().get(0).getDescription(), getResources()), "");
-
-        //region today UI
-        cityName.setText(weatherResponse.getName() + ",");
-
-        countryName.setText(Utility.getCountryNameFromCode(weatherResponse.getSys().getCountry()));
-
-        degreeSelsText.setText("" + Utility.getCelsiusFromKelvin(weatherResponse.getMain().getTemp()));
-
-        date.setText("" + Utility.convertIntegerDateToStringData(weatherResponse.getDt()));
-
-        weatherTypeText.setText("" + weatherResponse.getWeather().get(0).getDescription());
-
-        windforce.setText("" + weatherResponse.getWind().getDeg() + "/" + weatherResponse.getWind().getSpeed() + "hr");
-
-        humidity.setText("" + weatherResponse.getMain().getHumidity() + "%");
-
-        pressure.setText("" + weatherResponse.getMain().getPressure() + " mBar");
-        //endregion
+        setTodayWeatherResponse(weatherResponse);
 
         //region next 5 days UI
-
         WeatherNextDays weatherNextDays = DataProvider.getInstance().getWeatherForecast();
+        next5daysWeather(weatherNextDays);
+        //endregion
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                weatherViewModel.refreshWeatherForecast("1.3521", "103.8198");
+                if (weatherViewModel != null) {
+                    weatherViewModel.getWeatherData().observe(MainActivity.this, new Observer<WeatherResponse>() {
+                        @Override
+                        public void onChanged(WeatherResponse weatherResponse) {
+                            setTodayWeatherResponse(weatherResponse);
+                        }
+                    });
+
+                    weatherViewModel.getWeatherForecastData().observe(MainActivity.this, new Observer<WeatherNextDays>() {
+                        @Override
+                        public void onChanged(WeatherNextDays weatherNextDays) {
+                            next5daysWeather(weatherNextDays);
+                        }
+                    });
+
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+
+    }
+
+    private void next5daysWeather(WeatherNextDays weatherNextDays) {
         day_1temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(1).getTemp().getDay()));
 
         day_2temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(2).getTemp().getDay()));
@@ -94,18 +120,30 @@ public class MainActivity extends AppCompatActivity {
         day_4.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(4).getDt()));
 
         day_5.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(5).getDt()));
-
-        //endregion
-        //region go to searchActivity
-        searchIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
-                startActivity(searchIntent);
-            }
-        });
-        //endregion
     }
+
+    private void setTodayWeatherResponse(WeatherResponse weatherResponse) {
+
+        lottieAnimationView.setAnimationFromJson(Utility.getWeatherJson(weatherResponse.getWeather().get(0).getDescription(), getResources()), "");
+
+        //region today UI
+        cityName.setText(weatherResponse.getName() + ",");
+
+        countryName.setText(Utility.getCountryNameFromCode(weatherResponse.getSys().getCountry()));
+
+        degreeSelsText.setText("" + Utility.getCelsiusFromKelvin(weatherResponse.getMain().getTemp()));
+
+        date.setText("" + Utility.convertIntegerDateToStringData(weatherResponse.getDt()));
+
+        weatherTypeText.setText("" + weatherResponse.getWeather().get(0).getDescription());
+
+        windforce.setText("" + weatherResponse.getWind().getDeg() + "/" + weatherResponse.getWind().getSpeed() + "hr");
+
+        humidity.setText("" + weatherResponse.getMain().getHumidity() + "%");
+
+        pressure.setText("" + weatherResponse.getMain().getPressure() + " mBar");
+    }
+
 
     public void findViews() {
         lottieAnimationView = findViewById(R.id.animationView);
@@ -127,8 +165,7 @@ public class MainActivity extends AppCompatActivity {
         day_3temp = findViewById(R.id.day_3temp);
         day_4temp = findViewById(R.id.day_4temp);
         day_5temp = findViewById(R.id.day_5temp);
-        searchIcon = findViewById(R.id.searchIcon);
+        searchView = findViewById(R.id.searchView);
 
     }
-
 }
