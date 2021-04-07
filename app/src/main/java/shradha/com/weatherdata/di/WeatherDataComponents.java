@@ -10,6 +10,5 @@ import shradha.com.weatherdata.splashscreen.SplashActivity;
 @Component(modules = {WeatherDataModule.class,AppModule.class, ViewModelModule.class})
 public interface WeatherDataComponents {
     void inject(MainActivity mainActivity);
-
     void inject(SplashActivity splashActivity);
 }
