@@ -174,31 +174,31 @@ public class MainActivity extends AppCompatActivity {
 
         day_5temp.setText("" + Utility.getCelsiusFromKelvin(weatherNextDays.getDaily().get(4).getTemp().getDay()));
 
-        day_1.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(0).getDt()));
+        day_1.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(1).getDt()));
 
         time11Image.setAnimationFromJson(Utility.getWeatherJson(
                 weatherNextDays.getDaily().get(0).getWeather().get(0).getDescription()
                 ,getResources()));
 
-        day_2.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(1).getDt()));
+        day_2.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(2).getDt()));
 
         time12Image.setAnimationFromJson(Utility.getWeatherJson(
                 weatherNextDays.getDaily().get(1).getWeather().get(0).getDescription()
                 ,getResources()));
 
-        day_3.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(2).getDt()));
+        day_3.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(3).getDt()));
 
         time13Image.setAnimationFromJson(Utility.getWeatherJson(
                 weatherNextDays.getDaily().get(2).getWeather().get(0).getDescription()
                 ,getResources()));
 
-        day_4.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(3).getDt()));
+        day_4.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(4).getDt()));
 
         time14Image.setAnimationFromJson(Utility.getWeatherJson(
                 weatherNextDays.getDaily().get(3).getWeather().get(0).getDescription()
                 ,getResources()));
 
-        day_5.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(4).getDt()));
+        day_5.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(5).getDt()));
 
         time15Image.setAnimationFromJson(Utility.getWeatherJson(
                 weatherNextDays.getDaily().get(4).getWeather().get(0).getDescription()
