@@ -15,7 +15,9 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -55,12 +57,13 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION};
 
 
         // Dependency injection init for this activity
         ((WeatherDataApplication) getApplication()).getWeatherDataComponents().inject(this);
-        String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION};
+
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
@@ -151,17 +154,46 @@ public class SplashActivity extends AppCompatActivity {
 
 
                     } else {
+                        String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION};
 
                         // permission denied, boo! Disable the
                         // functionality that depends on this permission.
+                        Toast.makeText(
+                                SplashActivity.this,
+                                "Please enable location to use this app",
+                                Toast.LENGTH_LONG
+                        ).show();
+
+                        ActivityCompat.requestPermissions(this, permission, LOCATION_PERMISSION_REQUEST_CODE);
 
                     }
                     return;
+                } else {
+                    String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION};
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(
+                            SplashActivity.this,
+                            "Please enable location to use this app",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ActivityCompat.requestPermissions(SplashActivity.this, permission, LOCATION_PERMISSION_REQUEST_CODE);
+                        }
+                    },500);
+
                 }
 
             }
         }
     }
+
     private void gotoNextScreen() {
         Bundle bundle = ActivityOptions.makeCustomAnimation(this,
                 R.anim.slide_in_right_medium,

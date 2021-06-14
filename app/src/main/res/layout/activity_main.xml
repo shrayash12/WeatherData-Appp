@@ -7,31 +7,32 @@
     android:background="@drawable/gradient_background"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:gravity="right"
         android:layout_marginTop="5dp"
+        android:orientation="vertical"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivInfo"
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:src="@drawable/ic_baseline_info_24"
-            android:padding="10dp"
+            android:layout_margin="3dp"
             android:layout_marginTop="3dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="28dp"/>
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:layout_alignParentRight="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
-            app:queryHint="Serach location" />
+            app:queryHint="Search location" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

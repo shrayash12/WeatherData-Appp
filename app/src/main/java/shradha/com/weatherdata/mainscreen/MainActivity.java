@@ -223,11 +223,11 @@ public class MainActivity extends AppCompatActivity {
 
         weatherTypeText.setText("" + weatherResponse.getWeather().get(0).getDescription());
 
-        windforce.setText("" + weatherResponse.getWind().getDeg() + "/" + weatherResponse.getWind().getSpeed() + "hr");
+        windforce.setText(" Speed " + weatherResponse.getWind().getSpeed() + "m/s");
 
         humidity.setText("" + weatherResponse.getMain().getHumidity() + "%");
 
-        pressure.setText("" + weatherResponse.getMain().getPressure() + " mBar");
+        pressure.setText("" + weatherResponse.getMain().getPressure() + " hPa");
     }
 
 
