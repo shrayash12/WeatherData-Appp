@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:background="@drawable/gradient_background"
     android:orientation="vertical">
 
@@ -258,9 +259,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:layout_gravity="bottom"
         android:layout_marginLeft="30dp"
-
-        android:padding="3dp">
+        android:padding="3dp"
+        android:layout_marginStart="30dp">
 
 
         <TextView
@@ -293,7 +295,9 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:padding="10dp"
+        android:layout_marginBottom="10dp"
         android:weightSum="5"
+        android:layout_gravity="bottom"
         android:layout_marginTop="15dp"
         android:background="@drawable/layout_square_background"
         android:orientation="horizontal">
