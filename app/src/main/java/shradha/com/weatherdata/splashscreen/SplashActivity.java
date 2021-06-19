@@ -20,6 +20,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -60,6 +63,24 @@ public class SplashActivity extends AppCompatActivity {
         String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
+        LocationRequest mLocationRequest = LocationRequest.create();
+        mLocationRequest.setInterval(60000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        LocationCallback mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    if (location != null) {
+                        //TODO: UI updates.
+                    }
+                }
+            }
+        };
+
 
         // Dependency injection init for this activity
         ((WeatherDataApplication) getApplication()).getWeatherDataComponents().inject(this);
@@ -68,35 +89,34 @@ public class SplashActivity extends AppCompatActivity {
                 FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                     COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, mLocationCallback, null);
 
-                //override methods
-                fusedLocationClient.getLastLocation()
-                        .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                            @Override
-                            public void onSuccess(Location location) {
-                                // Got last known location. In some rare situations this can be null.
-                                if (location != null) {
-                                    weatherViewModel.refreshWeatherForecast("" + location.getLatitude(), "" + location.getLongitude());
-                                    weatherViewModel.getWeatherData().observe(SplashActivity.this, new Observer<WeatherResponse>() {
-                                        @Override
-                                        public void onChanged(WeatherResponse weatherResponse) {
-                                            DataProvider.getInstance().setData(weatherResponse);
-                                            gotoNextScreen();
-
-                                        }
-                                    });
-
-                                    weatherViewModel.getWeatherForecastData().observe(SplashActivity.this, new Observer<WeatherNextDays>() {
-                                        @Override
-                                        public void onChanged(WeatherNextDays weatherForecast) {
-                                            DataProvider.getInstance().setWeatherForecast(weatherForecast);
-                                        }
-                                    });
-
+                LocationServices.getFusedLocationProviderClient(this).getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            weatherViewModel.refreshWeatherForecast("" + location.getLatitude(), "" + location.getLongitude());
+                            weatherViewModel.getWeatherData().observe(SplashActivity.this, new Observer<WeatherResponse>() {
+                                @Override
+                                public void onChanged(WeatherResponse weatherResponse) {
+                                    DataProvider.getInstance().setData(weatherResponse);
+                                    gotoNextScreen();
 
                                 }
-                            }
-                        });
+                            });
+
+                            weatherViewModel.getWeatherForecastData().observe(SplashActivity.this, new Observer<WeatherNextDays>() {
+                                @Override
+                                public void onChanged(WeatherNextDays weatherForecast) {
+                                    DataProvider.getInstance().setWeatherForecast(weatherForecast);
+                                }
+                            });
+
+
+                        }
+                    }
+                });
 
             } else {
                 ActivityCompat.requestPermissions(this, permission, LOCATION_PERMISSION_REQUEST_CODE);
@@ -162,11 +182,15 @@ public class SplashActivity extends AppCompatActivity {
                         Toast.makeText(
                                 SplashActivity.this,
                                 "Please enable location to use this app",
-                                Toast.LENGTH_LONG
+                                Toast.LENGTH_SHORT
                         ).show();
-
-                        ActivityCompat.requestPermissions(this, permission, LOCATION_PERMISSION_REQUEST_CODE);
-
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                ActivityCompat.requestPermissions(SplashActivity.this, permission, LOCATION_PERMISSION_REQUEST_CODE);
+                            }
+                        },500);
                     }
                     return;
                 } else {
