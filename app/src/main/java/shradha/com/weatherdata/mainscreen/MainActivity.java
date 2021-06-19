@@ -17,10 +17,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
@@ -70,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
     LottieAnimationView time15Image;
     LottieAnimationView time13Image;
     LottieAnimationView time14Image;
-   ImageView imageInformation;
+    ImageView imageInformation;
+    ShimmerFrameLayout shimmerFrameLayout;
+    LinearLayout uiLayout;
 
 
     @Override
@@ -98,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public boolean onQueryTextSubmit(String query) {
+                shimmerFrameLayout.setVisibility(View.VISIBLE);
+                uiLayout.setVisibility(View.GONE);
                 List<LatLng> location = getLatLngFromString(query);
                 weatherViewModel.refreshWeatherForecast("" + location.get(0).latitude, "" + location.get(0).longitude);
                 if (weatherViewModel != null) {
@@ -176,41 +182,53 @@ public class MainActivity extends AppCompatActivity {
 
         day_1.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(1).getDt()));
 
-        time11Image.setAnimationFromJson(Utility.getWeatherJson(
+
+        time11Image.setAnimation(Utility.getWeatherJsonInputStream(
                 weatherNextDays.getDaily().get(0).getWeather().get(0).getDescription()
-                ,getResources()));
+                , getResources()), "" + weatherNextDays.getDaily().get(0).getWeather().get(0).getId());
+        time11Image.playAnimation();
 
         day_2.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(2).getDt()));
-
-        time12Image.setAnimationFromJson(Utility.getWeatherJson(
+        time12Image.setAnimation(Utility.getWeatherJsonInputStream(
                 weatherNextDays.getDaily().get(1).getWeather().get(0).getDescription()
-                ,getResources()));
+                , getResources()), "" + weatherNextDays.getDaily().get(1).getWeather().get(0).getId());
+        time12Image.playAnimation();
+
 
         day_3.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(3).getDt()));
-
-        time13Image.setAnimationFromJson(Utility.getWeatherJson(
+        time13Image.setAnimation(Utility.getWeatherJsonInputStream(
                 weatherNextDays.getDaily().get(2).getWeather().get(0).getDescription()
-                ,getResources()));
+                , getResources()), "" + weatherNextDays.getDaily().get(2).getWeather().get(0).getId());
+        time13Image.playAnimation();
+
 
         day_4.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(4).getDt()));
-
-        time14Image.setAnimationFromJson(Utility.getWeatherJson(
+        time14Image.setAnimation(Utility.getWeatherJsonInputStream(
                 weatherNextDays.getDaily().get(3).getWeather().get(0).getDescription()
-                ,getResources()));
+                , getResources()), "" + weatherNextDays.getDaily().get(3).getWeather().get(0).getDescription());
+        time14Image.playAnimation();
+
 
         day_5.setText("" + Utility.getDateForNextDay(weatherNextDays.getDaily().get(5).getDt()));
 
-        time15Image.setAnimationFromJson(Utility.getWeatherJson(
+        time15Image.setAnimation(Utility.getWeatherJsonInputStream(
                 weatherNextDays.getDaily().get(4).getWeather().get(0).getDescription()
-                ,getResources()));
+                , getResources()), "" + weatherNextDays.getDaily().get(3).getWeather().get(0).getId());
+        time15Image.playAnimation();
 
 
 
     }
 
     private void setTodayWeatherResponse(WeatherResponse weatherResponse) {
+        shimmerFrameLayout.setVisibility(View.GONE);
+        uiLayout.setVisibility(View.VISIBLE);
+        lottieAnimationView.setAnimation(
+                Utility.getWeatherJsonInputStream(weatherResponse.getWeather().get(0).getDescription(),
+                        getResources()), "" + weatherResponse.getWeather().get(0).getId()
+        );
+        lottieAnimationView.playAnimation();
 
-        lottieAnimationView.setAnimationFromJson(Utility.getWeatherJson(weatherResponse.getWeather().get(0).getDescription(), getResources()), "");
 
         //region today UI
         cityName.setText(weatherResponse.getName() + ",");
@@ -258,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
         time14Image = findViewById(R.id.time14Image);
         time15Image = findViewById(R.id.time15Image);
         imageInformation = findViewById(R.id.ivInfo);
-
+        shimmerFrameLayout = findViewById(R.id.shimmerLayout);
+        uiLayout = findViewById(R.id.uiLayout);
     }
 }

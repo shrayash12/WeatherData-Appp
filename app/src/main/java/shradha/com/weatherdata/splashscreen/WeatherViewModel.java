@@ -5,6 +5,8 @@ import android.util.Pair;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -38,6 +40,7 @@ public class WeatherViewModel extends ViewModel {
         weatherForecastResponseMutableLiveData = new MutableLiveData<>();
         weatherResponseMutableLiveData = new MutableLiveData<>();
         weatherRepository.getWeatherForecast(lat,lon)
+                .delay(1, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Pair<WeatherResponse, WeatherNextDays>>() {

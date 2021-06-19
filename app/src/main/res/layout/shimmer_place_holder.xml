@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:weightSum="1"
+    android:padding="2dp">
+
+
+   <GridLayout
+       android:layout_width="wrap_content"
+       android:layout_gravity="center"
+       android:layout_height="wrap_content">
+       <TextView
+           android:id="@+id/image1"
+           android:layout_width="50dp"
+           android:layout_weight="0.5"
+           android:background="#FFFFFF"
+           android:layout_height="50dp"
+           android:layout_gravity="center"
+           android:layout_margin="5dp"
+           android:scaleType="centerCrop" />
+       <TextView
+           android:id="@+id/image2"
+           android:layout_width="50dp"
+           android:layout_weight="0.5"
+           android:background="#FFFFFF"
+           android:layout_height="50dp"
+           android:layout_gravity="center"
+           android:layout_margin="5dp"
+           android:scaleType="centerCrop" />
+       <TextView
+           android:id="@+id/image3"
+           android:layout_width="50dp"
+           android:layout_weight="0.5"
+           android:background="#FFFFFF"
+           android:layout_height="50dp"
+           android:layout_gravity="center"
+           android:layout_margin="5dp"
+           android:scaleType="centerCrop" />
+       <TextView
+           android:id="@+id/image4"
+           android:layout_width="50dp"
+           android:layout_weight="0.5"
+           android:background="#FFFFFF"
+           android:layout_height="50dp"
+           android:layout_gravity="center"
+           android:layout_margin="5dp"
+           android:scaleType="centerCrop" />
+       <TextView
+           android:id="@+id/image5"
+           android:layout_width="50dp"
+           android:layout_weight="0.5"
+           android:background="#FFFFFF"
+           android:layout_height="50dp"
+           android:layout_gravity="center"
+           android:layout_margin="5dp"
+           android:scaleType="centerCrop" />
+   </GridLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Fetching weather"
+        android:textSize="18sp"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>

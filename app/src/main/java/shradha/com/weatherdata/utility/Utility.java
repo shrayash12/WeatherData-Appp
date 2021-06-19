@@ -6,6 +6,7 @@ import androidx.annotation.VisibleForTesting;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Locale;
@@ -119,6 +120,37 @@ public class Utility {
                 break;
         }
         return dayOfWeek;
+    }
+
+    public static InputStream getWeatherJsonInputStream(String weatherType, Resources resources) {
+        if (weatherType.contains("clear sky")) {
+            return resources.openRawResource(R.raw.sunny);
+        } else if (weatherType.contains("moderate rain")) {
+            return resources.openRawResource(R.raw.moderate_raining);
+        } else if (weatherType.contains("Haze") || weatherType.contains("haze")) {
+            return resources.openRawResource(R.raw.haze);
+        } else if (weatherType.contains("few clouds")) {
+            return resources.openRawResource(R.raw.fewclouds);
+        } else if (weatherType.contains("storm")) {
+            return resources.openRawResource(R.raw.stormhard);
+        } else if (weatherType.contains("overcast clouds")) {
+            return resources.openRawResource(R.raw.cloudy);
+        } else if (weatherType.contains("smoke")) {
+            return resources.openRawResource(R.raw.smoke);
+        } else if (weatherType.contains("snow")) {
+            return resources.openRawResource(R.raw.snow);
+        } else if (weatherType.contains("broken clouds")) {
+            return resources.openRawResource(R.raw.brokenclouds);
+        } else if (weatherType.contains("light rain")) {
+            return resources.openRawResource(R.raw.light_rain);
+        } else if (weatherType.contains("scattered clouds")) {
+            return resources.openRawResource(R.raw.scatteredclouds);
+        } else if (weatherType.contains("heavy intensity rain")) {
+            return resources.openRawResource(R.raw.heavyrain);
+        } else {
+            return resources.openRawResource(R.raw.
+                    default_weather);
+        }
     }
 
 
