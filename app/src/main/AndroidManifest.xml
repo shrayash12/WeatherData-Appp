@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherData">
         <activity android:name=".about.AboutActivity"></activity>
-        <activity android:name=".splashscreen.SearchActivity" />
         <activity android:name=".splashscreen.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

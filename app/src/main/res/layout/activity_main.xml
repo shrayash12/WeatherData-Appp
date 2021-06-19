@@ -50,6 +50,7 @@
                    android:layout_width="28dp"
                    android:layout_height="28dp"
                    android:layout_margin="3dp"
+                   android:layout_marginRight="16dp"
                    android:layout_marginTop="3dp"
                    android:src="@drawable/ic_baseline_info_24" />
 
@@ -323,6 +324,7 @@
                android:layout_marginLeft="30dp"
                android:layout_marginTop="15dp"
                android:layout_marginRight="30dp"
+               android:layout_marginBottom="5dp"
                android:background="@drawable/layout_square_background"
                android:orientation="horizontal"
                android:padding="10dp"
