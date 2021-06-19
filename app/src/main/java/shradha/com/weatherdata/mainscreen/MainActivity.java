@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -97,9 +98,13 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public boolean onQueryTextSubmit(String query) {
+                List<LatLng> location = getLatLngFromString(query);
+                if(location.size() <=0) {
+                    Toast.makeText(MainActivity.this,"Invalid location", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
                 shimmerFrameLayout.setVisibility(View.VISIBLE);
                 uiLayout.setVisibility(View.GONE);
-                List<LatLng> location = getLatLngFromString(query);
                 weatherViewModel.refreshWeatherForecast("" + location.get(0).latitude, "" + location.get(0).longitude);
                 if (weatherViewModel != null) {
                     weatherViewModel.getWeatherData().observe(MainActivity.this, new Observer<WeatherResponse>() {
