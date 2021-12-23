@@ -145,8 +145,6 @@
                    android:layout_alignParentRight="true"
                    android:layout_marginTop="60dp"
                    android:layout_marginRight="80dp"
-                   android:fontFamily="@font/questrial"
-                   android:text="16;"
                    android:textColor="#FFFFFF"
                    android:textSize="50dp"
                    android:textStyle="bold" />
